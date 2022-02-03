@@ -1,0 +1,48 @@
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("ATTACK x HUB Auto Farm Bounty Free Script")
+
+local serv = win:Server("Auto Farm Bounty", "")
+
+local TabB = serv:Channel("Auto Bounty")
+
+TabB:Toggle("Auto KillPlayer",_G.AutoFarmBounty,function(value)
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/MaxHub1/GOD-MAX-HUM/main/KillAura'))()
+end)
+
+TabB:Button("GodMode&bypass",_G.AutoFarmBounty,function()
+    spawn(function()
+    pcall(function()
+        while true do
+            wait(.0)
+            game.Players.LocalPlayer.Character.Humanoid.Health = 0.1
+        end
+    end)
+end)
+
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+    if v.ClassName == "Accessory" then
+        v:Destroy()
+    end
+end
+
+game.Players.LocalPlayer.Character.Shirt:Destroy()
+    game.Players.LocalPlayer.Character.Pants:Destroy()
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 0
+            game.Players.LocalPlayer.Character.Animate.Disabled = true
+end)
+
+TabB:Toggle("Aimbot ",_G.AutoFarmBounty,function(value)
+	Aimbot = bool
+end)
+local lp = game:GetService('Players').LocalPlayer
+local mouse = lp:GetMouse()
+mouse.Button1Down:Connect(function()
+	if Aimbot and game.Players.LocalPlayer.Character:FindFirstChild(_G.PLAYERSELECT) then
+		local args = {
+			[1] = game:GetService("Players"):FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart.Position,
+			[2] = game:GetService("Players"):FindFirstChild(SelectedKillPlayer).Character.HumanoidRootPart
+		}
+		game:GetService("Players").LocalPlayer.Character[_G.PLAYERSELECT].RemoteFunctionShoot:InvokeServer(unpack(args))
+	end 
+end)
